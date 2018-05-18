@@ -129,5 +129,17 @@ namespace CoreBackend.Api.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            var model = ProductService.Current.Products.SingleOrDefault(x => x.Id == id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+            ProductService.Current.Products.Remove(model);
+            return NoContent();
+        }
     }
 }
